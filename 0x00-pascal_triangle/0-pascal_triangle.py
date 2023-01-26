@@ -1,17 +1,21 @@
 #!/usr/bin/python3
+"""
+Pascals Triangle 2 alternative
+"""
 
-pascal_triangle = __import__('0-pascal_triangle').pascal_triangle
+
 def pascal_triangle(n):
+    """
+    Returns with a list of rows for the pascal triangle
+    """
     if n <= 0:
         return []
-    triangle = [[1]]
-    for i in range(1, n):
-        row = [1]
-        for j in range(1, i):
-            row.append(triangle[i-1][j-1] + triangle[i-1][j])
-        row.append(1)
-        triangle.append(row)
-    return triangle
 
-if __name__ == "__main__":
-    print_triangle(pascal_triangle(5))
+    a = [[1]]
+    for i in range(n-1):
+        temp = [0] + a[-1] + [0]
+        row = []
+        for j in range(len(a[-1]) + 1):
+            row.append(temp[j] + temp[j+1])
+        a.append(row)
+    return a
